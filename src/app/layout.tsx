@@ -1,6 +1,14 @@
+import { Toaster } from "@/components/ui/toaster";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import "@uploadthing/react/styles.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
 import "./globals.css";
+
+//db connection
+import "@/lib/db";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +35,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         {children}
+        <Toaster />
       </body>
     </html>
   );

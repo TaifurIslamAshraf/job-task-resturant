@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[1400px] mx-auto bg-[#F5F5F3]`}
       >
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         {children}

@@ -9,7 +9,14 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        "2xl": "1300px",
+        lg2: "1180px",
+        xs: "420px",
+      },
       colors: {
+        mprimry: "#F5F5F3",
+        bprimary: "#D2D0CC",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

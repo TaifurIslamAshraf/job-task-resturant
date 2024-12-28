@@ -4,6 +4,13 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  @apply !min-w-full;
+}
+
+/* select remove scrollbar */
+html body[data-scroll-locked] {
+  overflow: visible !important;
+  margin-right: 0 !important;
 }
 
 @layer base {

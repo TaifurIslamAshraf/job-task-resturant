@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Product from "@/model/product";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const id = (await params).id;
     const data = await request.json();
-    const product = await Product.findByIdAndUpdate(params.id, data, {
+    const product = await Product.findByIdAndUpdate(id, data, {
       new: true,
       runValidators: true,
     });
@@ -25,11 +26,12 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const product = await Product.findByIdAndDelete(params.id);
+    const id = (await params).id;
+    const product = await Product.findByIdAndDelete(id);
     if (!product) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }

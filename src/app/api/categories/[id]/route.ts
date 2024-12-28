@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Category from "@/model/category";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const id = (await params).id;
     const data = await request.json();
-    const category = await Category.findByIdAndUpdate(params.id, data, {
+    const category = await Category.findByIdAndUpdate(id, data, {
       new: true,
       runValidators: true,
     });
@@ -28,11 +29,12 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const category = await Category.findByIdAndDelete(params.id);
+    const id = (await params).id;
+    const category = await Category.findByIdAndDelete(id);
     if (!category) {
       return NextResponse.json(
         { error: "Category not found" },

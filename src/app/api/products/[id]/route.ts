@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import connectDB from "@/lib/db";
 import Product from "@/model/product";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,6 +8,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    await connectDB();
     const id = (await params).id;
     const data = await request.json();
     const product = await Product.findByIdAndUpdate(id, data, {

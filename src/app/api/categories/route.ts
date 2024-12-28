@@ -1,8 +1,11 @@
+import connectDB from "@/lib/db";
 import Category from "@/model/category";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   try {
+    await connectDB();
+
     const categories = await Category.find().sort({ order: 1 });
     return NextResponse.json(categories);
   } catch (error) {
@@ -15,6 +18,8 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    await connectDB();
+
     const data = await request.json();
     const category = await Category.create(data);
     return NextResponse.json(category);

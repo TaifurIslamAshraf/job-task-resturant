@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import connectDB from "@/lib/db";
 import Category from "@/model/category";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,6 +8,8 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    await connectDB();
+
     const id = (await params).id;
     const data = await request.json();
     const category = await Category.findByIdAndUpdate(id, data, {
@@ -33,6 +36,8 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    await connectDB();
+
     const id = (await params).id;
     const category = await Category.findByIdAndDelete(id);
     if (!category) {

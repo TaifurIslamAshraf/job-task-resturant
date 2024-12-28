@@ -7,9 +7,6 @@ import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import "./globals.css";
 
-//db connection
-import "@/lib/db";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

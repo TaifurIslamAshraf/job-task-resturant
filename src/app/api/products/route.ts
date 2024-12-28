@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import connectDB from "@/lib/db";
 import Product from "@/model/product";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
+    await connectDB();
     const products = await Product.find()
       .populate("category")
       .sort({ order: 1 });
@@ -18,6 +20,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    await connectDB();
     const data = await request.json();
     const product = await Product.create(data);
     return NextResponse.json(product);

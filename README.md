@@ -37,7 +37,7 @@ A modern restaurant management system built with Next.js that includes product m
 
 ## Tech Stack
 
-- **Framework**: Next.js 13+ with App Router
+- **Framework**: Next.js 15+ with App Router and React 19
 - **Database**: MongoDB with Mongoose
 - **Styling**: Tailwind CSS
 - **UI Components**:
